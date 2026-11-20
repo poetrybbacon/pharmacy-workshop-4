@@ -1,0 +1,14 @@
+{"meta":{"as_of":"2026-11-20"},"items":[
+{"stock_id":"S-001","sku":"AMOX500","lot":"AX2401","expiry":"2026-05-31","qty_on_hand":50,"status":"active"},
+{"stock_id":"S-002","sku":"AMOX500","lot":"AX2504","expiry":"2027-01-31","qty_on_hand":130,"status":"active"},
+{"stock_id":"S-003","sku":"AMOX500","lot":"AX2510","expiry":"2027-06-30","qty_on_hand":290,"status":"active"},
+{"stock_id":"S-004","sku":"IBU400","lot":"IB2512","expiry":"2027-12-31","qty_on_hand":200,"status":"quarantine"},
+{"stock_id":"S-005","sku":"IBU400","lot":"IB2601","expiry":"2027-03-31","qty_on_hand":180,"status":"active"},
+{"stock_id":"S-006","sku":"IBU400","lot":"IB2603","expiry":"2027-09-30","qty_on_hand":200,"status":"active"},
+{"stock_id":"S-007","sku":"PARA500","lot":"PC2602","expiry":"2027-08-31","qty_on_hand":600,"status":"active"},
+{"stock_id":"S-008","sku":"PARA500","lot":"PC2606","expiry":"2028-02-29","qty_on_hand":500,"status":"active"},
+{"stock_id":"S-009","sku":"CTZ10","lot":"CT2605","expiry":"2027-05-31","qty_on_hand":25,"status":"active"},
+{"stock_id":"S-010","sku":"OMEP20","lot":"OM2508","expiry":"2026-12-05","qty_on_hand":40,"status":"active"},
+{"stock_id":"S-011","sku":"OMEP20","lot":"OM2610","expiry":"2028-01-31","qty_on_hand":120,"status":"active"},
+{"stock_id":"S-012","sku":"GABA300","lot":"GB2601","expiry":"2027-06-30","qty_on_hand":60,"status":"quarantine"}
+]}

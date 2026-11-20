@@ -1,0 +1,92 @@
+{
+ "items": [
+  {
+   "dispense_id": "D-0001",
+   "sku": "PARA500",
+   "lot": "PC2602",
+   "qty": 40,
+   "unit_price": 2,
+   "amount": 80,
+   "patient_code": "P-1001",
+   "pharmacist_code": "RPH-01",
+   "dispensed_at": "2026-11-18T09:05:00"
+  },
+  {
+   "dispense_id": "D-0002",
+   "sku": "AMOX500",
+   "lot": "AX2504",
+   "qty": 14,
+   "unit_price": 12,
+   "amount": 168,
+   "patient_code": "P-1006",
+   "pharmacist_code": "RPH-02",
+   "dispensed_at": "2026-11-18T11:20:00"
+  },
+  {
+   "dispense_id": "D-0003",
+   "sku": "IBU400",
+   "lot": "IB2601",
+   "qty": 20,
+   "unit_price": 5,
+   "amount": 100,
+   "patient_code": "P-1007",
+   "pharmacist_code": "RPH-01",
+   "dispensed_at": "2026-11-18T15:45:00"
+  },
+  {
+   "dispense_id": "D-0004",
+   "sku": "PARA500",
+   "lot": "PC2602",
+   "qty": 20,
+   "unit_price": 2,
+   "amount": 40,
+   "patient_code": "P-1001",
+   "pharmacist_code": "RPH-01",
+   "dispensed_at": "2026-11-19T09:12:00"
+  },
+  {
+   "dispense_id": "D-0005",
+   "sku": "IBU400",
+   "lot": "IB2601",
+   "qty": 30,
+   "unit_price": 5,
+   "amount": 150,
+   "patient_code": "P-1002",
+   "pharmacist_code": "RPH-01",
+   "dispensed_at": "2026-11-19T10:40:00"
+  },
+  {
+   "dispense_id": "D-0006",
+   "sku": "CTZ10",
+   "lot": "CT2605",
+   "qty": 10,
+   "unit_price": 6,
+   "amount": 60,
+   "patient_code": "P-1003",
+   "pharmacist_code": "RPH-02",
+   "dispensed_at": "2026-11-19T13:05:00"
+  },
+  {
+   "dispense_id": "D-0007",
+   "sku": "OMEP20",
+   "lot": "OM2508",
+   "qty": 14,
+   "unit_price": 9,
+   "amount": 126,
+   "patient_code": "P-1004",
+   "pharmacist_code": "RPH-02",
+   "dispensed_at": "2026-11-20T08:50:00"
+  },
+  {
+   "dispense_id": "D-0008",
+   "sku": "AMOX500",
+   "lot": "AX2504",
+   "qty": 21,
+   "unit_price": 12,
+   "amount": 252,
+   "patient_code": "P-1005",
+   "pharmacist_code": "RPH-01",
+   "dispensed_at": "2026-11-20T09:30:00"
+  }
+ ]
+}

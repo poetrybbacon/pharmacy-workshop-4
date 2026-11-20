@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Workshop ร้านยาจำลอง</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eaf4ff;--card:#fff;--ink:#0b2a4a;--mute:#5b7694;--blue:#2b7fff;--sky:#9fd0ff;--line:#0b2a4a}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(circle at 90% -10%,#cfe6ff 0,transparent 45%),var(--bg);color:var(--ink);font:16px/1.6 "Noto Sans Thai",system-ui,sans-serif;padding:24px 16px 40px}
+main{max-width:560px;margin:0 auto}
+h1{font-size:2rem;line-height:1.25;font-weight:800;margin:8px 0 4px}
+.sub{color:var(--mute);margin:0 0 24px}
+.sticker{display:inline-block;background:var(--blue);color:#fff;font-weight:600;border-radius:999px;padding:2px 14px;transform:rotate(-2deg)}
+nav{display:grid;gap:16px}
+a.btn{display:block;min-height:72px;background:var(--card);color:var(--ink);text-decoration:none;border:3px solid var(--line);border-radius:24px;padding:14px 20px;box-shadow:5px 5px 0 var(--sky);transition:transform .12s,box-shadow .12s}
+a.btn:active{transform:translate(4px,4px);box-shadow:1px 1px 0 var(--sky)}
+a.btn:focus-visible{outline:4px solid var(--blue);outline-offset:3px}
+a.btn:first-child{background:var(--blue);color:#fff;box-shadow:5px 5px 0 var(--line)}
+a.btn:first-child .d{color:#dcebff}
+.t{display:block;font-size:1.25rem;font-weight:800}
+.d{display:block;color:var(--mute)}
+.note{margin-top:28px;padding:12px 16px;border-radius:16px;background:#fff;border:2px dashed var(--sky);color:var(--mute);text-align:center}
+</style>
+</head>
+<body>
+<main>
+  <span class="sticker">Workshop</span>
+  <h1>ร้านยาจำลอง</h1>
+  <p class="sub">เลือกหน้าที่ต้องการใช้งาน</p>
+  <nav id="menu"></nav>
+  <p class="note">ข้อมูลทั้งหมดเป็นข้อมูลจำลอง ห้ามใส่ชื่อผู้ป่วยจริง</p>
+</main>
+<script>
+// เพิ่มหรือลบลิงก์ได้ด้วยการแก้ทีละหนึ่งบรรทัดในอาร์เรย์นี้
+const LINKS = [
+  {href:"pos.html", title:"หน้าขายยา", desc:"เลือกยา กรอกจำนวน บันทึกการจ่ายยา"},
+  {href:"admin.html", title:"จัดการระบบ (ผู้ดูแล)", desc:"บัญชียา คลังรายล็อต รายการจ่าย ต้องใช้รหัสผู้ดูแล"},
+  {href:"dashboard.html", title:"Dashboard คลังยา", desc:"ภาพรวมคลัง ล็อตใกล้หมดอายุ ยาต่ำกว่าจุดสั่งซื้อ"},
+  {href:"status.html", title:"ตรวจสถานะระบบ", desc:"ตรวจว่าการเชื่อมต่อแต่ละส่วนทำงานปกติ"}
+];
+const menu = document.getElementById("menu");
+for (const l of LINKS) {
+  const a = document.createElement("a");
+  a.className = "btn"; a.href = l.href;
+  const t = document.createElement("span"); t.className = "t"; t.textContent = l.title;
+  const d = document.createElement("span"); d.className = "d"; d.textContent = l.desc;
+  a.append(t, d); menu.append(a);
+}
+</script>
+</body>
+</html>

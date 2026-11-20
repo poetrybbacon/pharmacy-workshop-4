@@ -1,0 +1,40 @@
+{
+ "items": [
+  {
+   "sku": "AMOX500",
+   "name_th": "อะม็อกซีซิลลิน 500 มก. (แคปซูล)",
+   "reorder_level": 200,
+   "price": 12
+  },
+  {
+   "sku": "IBU400",
+   "name_th": "ไอบูโพรเฟน 400 มก. (เม็ด)",
+   "reorder_level": 150,
+   "price": 5
+  },
+  {
+   "sku": "PARA500",
+   "name_th": "พาราเซตามอล 500 มก. (เม็ด)",
+   "reorder_level": 300,
+   "price": 2
+  },
+  {
+   "sku": "CTZ10",
+   "name_th": "เซทิริซีน 10 มก. (เม็ด)",
+   "reorder_level": 60,
+   "price": 6
+  },
+  {
+   "sku": "OMEP20",
+   "name_th": "โอเมพราโซล 20 มก. (แคปซูล)",
+   "reorder_level": 100,
+   "price": 9
+  },
+  {
+   "sku": "GABA300",
+   "name_th": "กาบาเพนติน 300 มก. (แคปซูล)",
+   "reorder_level": 50,
+   "price": 15
+  }
+ ]
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600;800&display=swap" rel="stylesheet"><title>Dashboard คลังยา</title><style>:root{--bg:#eaf4ff;--ink:#0b2a4a;--mute:#5b7694;--blue:#2b7fff;--sky:#9fd0ff;--ok:#0f9d6b;--okbg:#dcf7ec;--warn:#b86200;--warnbg:#fff0d6;--err:#c62f43;--errbg:#ffe3e7}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 95% -5%,#cfe6ff 0,transparent 40%),var(--bg);color:var(--ink);font:16px/1.6 "Noto Sans Thai",system-ui,sans-serif;padding:20px 16px 48px}main{max-width:980px;margin:0 auto;display:grid;gap:18px}h1{font-size:1.8rem;font-weight:800;margin:0}h2{font-size:1.15rem;font-weight:800;margin:0 0 10px}a.back{color:var(--blue);font-weight:600;text-decoration:none}.card{background:#fff;border:3px solid var(--ink);border-radius:24px;padding:18px;box-shadow:5px 5px 0 var(--sky)}.note{color:var(--mute);margin:0}.hide{display:none}.wrap{overflow-x:auto}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #cfe0f2}th{color:var(--mute);font-weight:600}input,button{font:inherit}input{min-height:52px;border:2px solid var(--ink);border-radius:16px;padding:8px 14px;background:#fff;color:var(--ink)}button{min-height:52px;font-weight:800;border:3px solid var(--ink);border-radius:999px;padding:0 24px;background:var(--blue);color:#fff;cursor:pointer}button:disabled{background:#b9c8da;cursor:not-allowed}input:focus-visible,button:focus-visible{outline:4px solid var(--blue);outline-offset:2px}.tag{display:inline-block;border-radius:999px;padding:0 10px;font-size:.9rem;font-weight:600;border:2px solid}.tag.ok{background:var(--okbg);color:var(--ok)}.tag.warn{background:var(--warnbg);color:var(--warn)}.tag.err{background:var(--errbg);color:var(--err)}.box{border-radius:16px;padding:12px 16px;font-weight:600;background:var(--errbg);color:var(--err);border:2px solid var(--err)}.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}.kpi{background:#f4f9ff;border:2px solid var(--sky);border-radius:20px;padding:12px 16px}.kpi b{display:block;font-size:2rem;line-height:1.3}</style></head><body><main>
+<div><a class="back" href="index.html">‹ กลับหน้าแรก</a><h1>Dashboard คลังยา</h1><p class="note">ข้อมูลจำลอง ห้ามใส่ชื่อผู้ป่วยจริง · <span id="asof"></span></p></div>
+<div id="err" class="box hide"></div>
+<section class="card"><h2>ยอดขาย</h2><div class="kpis" id="skpis"></div></section>
+<section class="card"><h2>ยอดขายรายวัน</h2><div class="wrap"><table><thead><tr><th>วันที่</th><th>จำนวนรายการ</th><th>ยอดเงิน</th></tr></thead><tbody id="day"></tbody></table></div></section>
+<section class="card"><h2>ยาขายดี (ตามยอดเงิน)</h2><div class="wrap"><table><thead><tr><th>ยา</th><th>จำนวนที่ขาย</th><th>ยอดเงิน</th></tr></thead><tbody id="top"></tbody></table></div></section>
+<section class="card"><h2>รายการขายล่าสุด</h2><div class="wrap"><table><thead><tr><th>เวลา</th><th>ยา</th><th>ล็อต</th><th>จำนวน</th><th>ยอดเงิน</th><th>ผู้ป่วย</th></tr></thead><tbody id="recent"></tbody></table></div></section>
+<section class="card"><h2>ภาพรวมคลัง</h2><div class="kpis" id="kpis"></div></section>
+<section class="card"><h2>ล็อตใกล้หมดอายุ (ภายใน 30 วัน)</h2><div class="wrap"><table><thead><tr><th>SKU</th><th>ล็อต</th><th>หมดอายุ</th><th>เหลืออีก</th><th>คงเหลือ</th></tr></thead><tbody id="exp"></tbody></table></div></section>
+<section class="card"><h2>ยาต่ำกว่าจุดสั่งซื้อ</h2><div class="wrap"><table><thead><tr><th>ยา</th><th>ใช้ได้</th><th>จุดสั่งซื้อ</th><th>สถานะ</th></tr></thead><tbody id="low"></tbody></table></div></section>
+<script src="mock-api.js"></script>
+<script>
+const $=i=>document.getElementById(i),el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!==undefined)e.textContent=x;return e};
+const fmt=n=>Number(n||0).toLocaleString("en-US")+" บาท";
+const days=(a,b)=>{const p=s=>Date.UTC(...s.split("-").map((n,i)=>i===1?n-1:+n));return Math.round((p(b)-p(a))/864e5)};
+const rows=(id,list,empty,cols)=>{const b=$(id);b.replaceChildren();if(!list.length){const tr=el("tr"),td=el("td","note",empty);td.colSpan=cols||5;tr.append(td);b.append(tr)}
+ for(const r of list){const tr=el("tr");for(const v of r){const td=el("td");if(v instanceof Node)td.append(v);else td.textContent=v;tr.append(td)}b.append(tr)}};
+const kpis=(id,list)=>$(id).replaceChildren(...list.map(([l,v])=>{const k=el("div","kpi");k.append(el("span","note",l),el("b","",String(v)));return k}));
+async function load(){
+ try{const k=new AbortController(),t=setTimeout(()=>k.abort(),8000);const r=await fetch("/api/data",{signal:k.signal});clearTimeout(t);if(r.status!==200)throw 0;const d=await r.json();
+  const asOf=d.stock.meta.as_of,inact=new Set(((d.catalog&&d.catalog.items)||[]).filter(c=>c.is_active===false).map(c=>c.sku));
+  const lots=d.stock.items.filter(s=>(s.status===undefined||s.status==="active")&&s.expiry&&s.expiry>=asOf&&s.qty_on_hand>0&&!inact.has(s.sku));
+  const use={};for(const s of lots)use[s.sku]=(use[s.sku]||0)+s.qty_on_hand;
+  const all=d.drugs.items,drugs=all.filter(g=>!inact.has(g.sku)),nm=s=>{const g=all.find(x=>x.sku===s);return g?(g.name_th||g.name||s):s},price={};all.forEach(g=>price[g.sku]=g.price||0);
+  const exp=lots.map(s=>({s,n:days(asOf,s.expiry)})).filter(x=>x.n<=30).sort((a,b)=>a.n-b.n);
+  const low=drugs.filter(g=>g.reorder_level!==undefined&&(use[g.sku]||0)<g.reorder_level);
+  $("asof").textContent="ข้อมูล ณ "+asOf;
+  const held=d.stock.items.filter(s=>s.status&&s.status!=="active").length;
+  kpis("kpis",[["ชนิดยาที่พร้อมจ่าย",Object.keys(use).length],["ยอดใช้ได้รวม",Object.values(use).reduce((a,b)=>a+b,0)],["ล็อตใกล้หมดอายุ",exp.length],["ต่ำกว่าจุดสั่งซื้อ",low.length],["ล็อตที่กัก/ตัดจำหน่าย",held]]);
+  rows("exp",exp.map(x=>[x.s.sku,x.s.lot,x.s.expiry,x.n+" วัน",String(x.s.qty_on_hand)]),"ไม่มีล็อตใกล้หมดอายุ");
+  rows("low",low.map(g=>[nm(g.sku),String(use[g.sku]||0),String(g.reorder_level),el("span","tag warn","⚠ ต่ำกว่าจุดสั่งซื้อ")]),"ไม่มียาต่ำกว่าจุดสั่งซื้อ",4);
+  // ยอดขาย: คำนวณจากรายการจ่าย (amount ถ้าไม่มีใช้ จำนวน x ราคาต่อหน่วยในบัญชียา)
+  const sales=(d.dispense_log.items||[]).map(r=>({...r,amt:r.amount!==undefined?r.amount:r.qty*(price[r.sku]||0),day:String(r.dispensed_at||"").slice(0,10)}));
+  const sum=l=>l.reduce((n,r)=>n+r.amt,0),today=sales.filter(r=>r.day===asOf);
+  kpis("skpis",[["ยอดขายวันนี้",fmt(sum(today))],["รายการขายวันนี้",today.length],["ยอดขายรวม",fmt(sum(sales))],["รายการขายทั้งหมด",sales.length]]);
+  const byDay={},byDrug={};for(const r of sales){const a=byDay[r.day]||(byDay[r.day]={n:0,a:0});a.n++;a.a+=r.amt;const b=byDrug[r.sku]||(byDrug[r.sku]={q:0,a:0});b.q+=r.qty;b.a+=r.amt}
+  rows("day",Object.keys(byDay).sort().reverse().slice(0,7).map(k=>[k||"-",String(byDay[k].n),fmt(byDay[k].a)]),"ยังไม่มียอดขาย",3);
+  rows("top",Object.keys(byDrug).sort((a,b)=>byDrug[b].a-byDrug[a].a).slice(0,5).map(s=>[nm(s),String(byDrug[s].q),fmt(byDrug[s].a)]),"ยังไม่มียอดขาย",3);
+  rows("recent",sales.slice().sort((a,b)=>String(b.dispensed_at).localeCompare(String(a.dispensed_at))).slice(0,10).map(r=>[String(r.dispensed_at||"-").replace("T"," ").slice(0,16),nm(r.sku),r.lot||"-",String(r.qty),fmt(r.amt),r.patient_code||"-"]),"ยังไม่มีรายการขาย",6);
+ }catch(e){const x=$("err");x.textContent="โหลดข้อมูลไม่สำเร็จ กรุณาลองใหม่";x.classList.remove("hide")}}
+load();
+</script></main></body></html>
